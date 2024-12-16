@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Alteração de Produto</title>
+  </head>
+  <body>
+    <!-- conteudo principal -->
+    <main layout:fragment="conteudo" th:fragment="formulario" id="main" class="w-full">
+      <div class="mt-10 ml-10">
+        <h1 class="text-3xl">Alteração de Produto</h1>
+        <!-- Formulario -->
+        <form th:hx-post="@{/produtos/alterar}" hx-target="#main" hx-swap="outerHTML" th:object="${produto}">
+          <label for="codigo" class="block text-gray-700 font-medium mb-2 mt-10">Código</label>
+          <input type="hidden" th:field="*{codigo}" />
+          <input type="text" th:field="*{codigo}" disabled class="w-1/2 py-3 px-4 text-gray-500 border-gray-300 rounded-lg focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none" />
+          <div th:replace="~{layout/fragments/forms::inputtext ('Nome', 'nome')}">...</div>
+          <div th:replace="~{layout/fragments/forms::inputtext ('Descrição', 'descricao')}">...</div>
+          <div th:replace="~{layout/fragments/forms::inputtext ('Preço Diário', 'precoDiario')}">...</div>
+          <br />
+          <button type="submit" class="py-3 px-4 inline-flex items-center mt-5 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">Alterar</button>
+        </form>
+      </div>
+
+      <div th:replace="~{layout/fragments/csrf :: csrf}"></div>
+    </main>
+    <!-- !conteudo principal -->
+  </body>
+</html>

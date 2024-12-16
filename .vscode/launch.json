@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<devaluga>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "web.devaluga.Application",
+            "projectName": "devaluga",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<devaluga>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "web.devaluga.Application",
+            "projectName": "devaluga",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<devaluga>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "web.devaluga.Application",
+            "projectName": "devaluga",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<controlevacinacao>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "web.devaluga.Application",
+            "projectName": "controlevacinacao",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

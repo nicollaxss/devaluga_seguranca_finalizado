@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Confirmação de Remoção de Pessoa</title>
+  </head>
+  <body>
+    <!-- conteudo principal -->
+    <main layout:fragment="conteudo" th:fragment="confirmacao" id="main" class="flex flex-col w-full">
+      <h1 class="text-3xl mt-10 ml-10">Você tem certeza que quer remover o produto?</h1>
+      <h2 th:text="'Código: ' + ${produto.codigo}" class="text-xl mt-10 ml-10"></h2>
+      <h2 th:text="'Nome: ' + ${produto.nome}" class="text-xl mt-4 ml-10"></h2>
+      <h2 th:text="'Descrição: ' + ${produto.descricao}" class="text-xl mt-4 ml-10"></h2>
+      <h2 th:text="'Preço Diário: ' + ${produto.precoDiario}" class="text-xl mt-4 ml-10"></h2>
+      <div class="flex mt-10 ml-10">
+        <form th:hx-get="@{/produtos/pesquisar}" hx-target="#main" hx-swap="outerHTML">
+          <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">Voltar</button>
+        </form>
+        <form th:hx-post="@{/produtos/remover}" hx-target="#main" hx-swap="outerHTML" class="ml-10">
+          <input type="hidden" name="codigo" th:value="${produto.codigo}" />
+          <input type="hidden" name="nome" th:value="${produto.nome}" />
+          <input type="hidden" name="descricao" th:value="${produto.descricao}" />
+          <input type="hidden" name="precoDiario" th:value="${produto.precoDiario}" />
+          <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none">Remover</button>
+        </form>
+      </div>
+
+      <div th:replace="~{layout/fragments/csrf :: csrf}"></div>
+    </main>
+    <!-- !conteudo principal -->
+  </body>
+</html>

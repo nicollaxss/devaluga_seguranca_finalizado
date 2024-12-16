@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Usuarios Pesquisados</title>
+  </head>
+  <body>
+    <!-- conteudo principal -->
+    <main layout:fragment="conteudo" th:fragment="tabela" id="main" class="flex flex-col w-full">
+      <h1 class="text-3xl mt-10 ml-10">Usuarios Pesquisados</h1>
+
+      <h1 th:if="${pagina.vazia}" class="mt-10 ml-10 text-2xl">Não foram encontradas usuarios nessa pesquisa</h1>
+
+      <div th:if="${not pagina.vazia}" class="flex flex-col ml-10 md:w-4/5">
+        <div class="-m-1.5 overflow-x-auto mt-5">
+          <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class="border rounded-xl overflow-hidden shadow">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'codigo', 'Código', '')}"></div>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'nome', 'Nome', '')}"></div>
+                    <!-- <th scope="col" colspan="2" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Ações</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="usuario : ${pagina.conteudo}" class="odd:bg-white even:bg-gray-100 hover:bg-gray-200">
+                    <td th:text="${usuario.codigo}" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">John Brown</td>
+                    <td th:text="${usuario.nome}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">45</td>
+
+                    <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      <form th:hx-post="@{/usuarios/abriralterar}" hx-target="#main" hx-swap="outerHTML">
+                        <input type="hidden" name="codigo" th:value="${pessoa.codigo}" />
+                        <input type="hidden" name="nome" th:value="${pessoa.nome}" />
+                        <input type="hidden" name="cpf" th:value="${pessoa.cpf}" />
+                        <input type="hidden" name="telefone" th:value="${pessoa.telefone}" />
+                        <input type="hidden" name="email" th:value="${pessoa.email}" />
+                        <input type="hidden" name="endereco" th:value="${pessoa.endereco}" />
+                        <input type="hidden" name="dataNascimento" th:value="${{pessoa.dataNascimento}}" />
+                        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">Alterar</button>
+                      </form>
+                    </td> -->
+
+
+                    <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      <form th:hx-post="@{/usuarios/remover}" hx-target="#main" hx-swap="outerHTML" th:hx-confirm="${'Você vai remover a pessoa ' + pessoa.nome}">
+                        <input type="hidden" name="codigo" th:value="${pessoa.codigo}" />
+                        <input type="hidden" name="nome" th:value="${pessoa.nome}" />
+                        <input type="hidden" name="cpf" th:value="${pessoa.cpf}" />
+                        <input type="hidden" name="telefone" th:value="${pessoa.telefone}" />
+                        <input type="hidden" name="email" th:value="${pessoa.email}" />
+                        <input type="hidden" name="endereco" th:value="${pessoa.endereco}" />
+                        <input type="hidden" name="dataNascimento" th:value="${{pessoa.dataNascimento}}" />
+                        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none">Remover</button>
+                      </form>
+                    </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+      </div>
+
+      <div th:replace="~{layout/fragments/csrf :: csrf}"></div>
+    </main>
+    <!-- !conteudo principal -->
+  </body>
+</html>

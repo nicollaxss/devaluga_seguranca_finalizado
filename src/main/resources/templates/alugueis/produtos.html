@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Produtos Pesquisados</title>
+  </head>
+  <body>
+    <!-- conteudo principal -->
+    <main layout:fragment="conteudo" th:fragment="tabela" id="main" class="flex flex-col w-full">
+      <h1 class="text-3xl mt-10 ml-10">Produtos Pesquisados para Cadastro de Aluguel</h1>
+
+      <h1 th:if="${pagina.vazia}" class="mt-10 ml-10 text-2xl">Não foram encontrados produtos nessa pesquisa</h1>
+
+      <div th:if="${not pagina.vazia}" class="flex flex-col ml-10 md:w-4/5">
+        <div class="-m-1.5 overflow-x-auto mt-5">
+          <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class="border rounded-xl overflow-hidden shadow">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'codigo', 'Código', '')}"></div>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'nome', 'Nome', '')}"></div>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'descricao', 'Descrição', '')}"></div>
+                    <div th:replace="~{layout/fragments/paginacao :: coluna(${pagina}, 'precoDiario', 'Preço Diário', '')}"></div>
+
+                    <!-- <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Descrição</th> -->
+                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="produto : ${pagina.conteudo}" class="odd:bg-white even:bg-gray-100 hover:bg-gray-200">
+                    <td th:text="${produto.codigo}" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">John Brown</td>
+                    <td th:text="${produto.nome}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">45</td>
+                    <td th:text="${produto.descricao}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">New York No. 1 Lake Park</td>
+                    <td th:text="${produto.precoDiario}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">New York No. 1 Lake Park</td>
+
+                    <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800">
+                      <form th:hx-post="@{/alugueis/produtoescolhido}" hx-target="#main" hx-swap="outerHTML">
+                        <input type="hidden" name="codigo" th:value="${produto.codigo}" />
+                        <input type="hidden" name="nome" th:value="${produto.nome}" />
+                        <input type="hidden" name="descricao" th:value="${produto.descricao}" />
+                        <input type="hidden" name="precoDiario" th:value="${produto.precoDiario}" />
+
+                        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">Escolher</button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+      </div>
+
+      <div th:replace="~{layout/fragments/csrf :: csrf}"></div>
+    </main>
+    <!-- !conteudo principal -->
+  </body>
+</html>

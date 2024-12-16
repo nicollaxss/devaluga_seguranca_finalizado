@@ -1,0 +1,1 @@
+ALTER TABLE produto RENAME COLUMN precodiario TO preco_diario;

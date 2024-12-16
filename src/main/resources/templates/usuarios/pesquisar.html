@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Pesquisa de Usuarios</title>
+  </head>
+  <body>
+    <!-- conteudo principal -->
+    <main layout:fragment="conteudo" th:fragment="formulario" id="main" class="flex flex-col w-full">
+      <h1 class="text-3xl mt-10 ml-10">Pesquisa de Usuarios</h1>
+      <!-- Formulario -->
+      <form th:hx-get="@{/usuarios/pesquisar}" hx-target="#main" hx-swap="outerHTML" class="w-1/2 mt-10 ml-10">
+        <label for="codigo" class="block text-gray-700 font-medium mb-2">Código</label>
+        <input type="text" id="codigo" name="codigo" class="w-full py-3 px-4 text-gray-500 border-gray-300 rounded-lg focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none" />
+
+        <label for="nome" class="block text-gray-700 font-medium mb-2 mt-5">Nome</label>
+        <input type="text" id="nome" name="nome" class="w-full py-3 px-4 text-gray-500 border-gray-300 rounded-lg focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:pointer-events-none" />
+
+        <br />
+        <button type="submit" class="py-3 px-4 inline-flex items-center mt-5 gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none">Pesquisar</button>
+      </form>
+      <div th:if="${notificacao != null}" th:object="${notificacao}">
+        <input type="hidden" id="mensagem" th:value="*{mensagem}">
+        <input type="hidden" id="tipo" th:value="*{tipo}">
+        <input type="hidden" id="intervalo" th:value="*{intervalo}">
+      </div>
+    </main>
+    <!-- !conteudo principal -->
+  </body>
+</html>

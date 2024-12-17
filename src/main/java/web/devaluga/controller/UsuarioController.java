@@ -89,24 +89,20 @@ public class UsuarioController {
 			model.addAttribute("todosPapeis", papeis);
 			return "usuarios/cadastrar :: formulario";
 		} 
-		// else {
-		// 	usuario.setAtivo(true);
-		// 	usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		// 	cadastroUsuarioService.salvar(usuario);
-		// 	redirectAttributes.addAttribute("mensagem", "Cadastro de usuário efetuado com sucesso.");
-		// 	return "redirect:/usuarios/cadastrosucesso";
-		// }
 
-		if (!isAdmin(authentication)) {
-            // // System.out.println("O usuario nao tem permissao de remover");
-            // HtmxLocation hl = new HtmxLocation("/alugueis/erro2");
-            // hl.setTarget("#main");
-            // hl.setSwap("outerHTML");
-            // htmxResponse.location(hl);
-            // return "mensagem";
-			redirectAttributes.addAttribute("mensagem", "Você já está logado.");
-			return "redirect:/usuarios/cadastroerro";
-        } 
+
+		// ----- Configurar para quando o usuario estiver deslogado -----//	
+
+		// if (!isAdmin(authentication)) {
+        //     // // System.out.println("O usuario nao tem permissao de remover");
+        //     // HtmxLocation hl = new HtmxLocation("/alugueis/erro2");
+        //     // hl.setTarget("#main");
+        //     // hl.setSwap("outerHTML");
+        //     // htmxResponse.location(hl);
+        //     // return "mensagem";
+		// 	redirectAttributes.addAttribute("mensagem", "Você já está logado.");
+		// 	return "redirect:/usuarios/cadastroerro";
+        // } 
 		else {
 			usuario.setAtivo(true);
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
